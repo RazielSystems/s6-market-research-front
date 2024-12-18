@@ -1,0 +1,172 @@
+/* Estilos globales */
+body {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+/* Header */
+.bg-gradient-purple {
+  background: linear-gradient(90deg, #6a1b9a, #8e24aa);
+}
+
+.logo {
+  max-height: 50px;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+/* Barra de búsqueda */
+.search-bar input {
+  border: 2px solid #8e24aa;
+  border-radius: 30px;
+  padding: 0.5rem 1rem;
+}
+
+/* Tabla */
+.bg-purple {
+  background-color: #8e24aa !important;
+}
+
+.icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-ghost {
+  background: url('../assets/empresa-fantasma.svg') no-repeat center center;
+}
+
+.icon-sat {
+  background: url('../assets/deudor-sat.svg') no-repeat center center;
+}
+
+.icon-judge {
+  background: url('../assets/sancionado.svg') no-repeat center center;
+}
+
+.icon-ban {
+  background: url('../assets/inhabilitado.svg') no-repeat center center;
+}
+
+.badge-success {
+  /* background-color: #4caf50 !important; */
+  background: url('../assets/vigente.svg') no-repeat center center;
+}
+
+.badge-danger {
+  /* background-color: #f44336 !important; */
+  background: url('../assets/no-vigente.svg') no-repeat center center;
+
+}
+
+/* Contrato */
+.contract-info {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+
+/* Spinner */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 6px solid #e0e0e0;
+  /* Color del borde externo */
+  border-top: 6px solid #8e24aa;
+  /* Color del borde animado */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+/* Animación */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Texto de cargando */
+.loading-text {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #666;
+}
+
+/* linea de tiempo */
+
+.timeline-container {
+  max-height: 400px;
+  /* Altura máxima para el contenedor */
+  overflow-y: auto;
+  /* Habilitar scroll vertical */
+  padding-right: 1rem;
+  /* Espacio para evitar que el scroll tape contenido */
+}
+
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background-color: #dee2e6;
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.timeline-item-left {
+  text-align: right;
+}
+
+.timeline-item-right {
+  text-align: left;
+}
+
+.timeline-item-content {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 1rem;
+  max-width: 300px;
+  display: inline-block;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background-color: #0d6efd;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  transform: translate(-50%, -50%);
+}
+
+.timeline-item-left .timeline-item-content {
+  margin-right: calc(50% + 20px);
+}
+
+.timeline-item-right .timeline-item-content {
+  margin-left: calc(50% + 20px);
+}
