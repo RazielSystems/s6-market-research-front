@@ -1,0 +1,200 @@
+<div class="container mt-4">
+  <!-- <h2 class="text-center mb-4">Detalles del Declarante</h2> -->
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item" *ngFor="let item of servidores; let i = index">
+      <h2 class="accordion-header" id="heading{{ i }}">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#collapse' + i"
+          aria-expanded="true"
+          [attr.aria-controls]="'collapse' + i"
+        >
+          {{ item.declarante.nombre }} {{ item.declarante.primerApellido }}
+          {{ item.declarante.segundoApellido }} ({{
+            item.declarante.correoElectronico.institucional || "No disponible"
+          }})
+        </button>
+      </h2>
+      <div
+        [id]="'collapse' + i"
+        class="accordion-collapse collapse"
+        [class.show]="i === 0"
+        [attr.aria-labelledby]="'heading' + i"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <button
+                class="nav-link active"
+                [id]="'pills-empleo-tab' + i"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-empleo"
+                type="button"
+                role="tab"
+                aria-controls="pills-empleo"
+                aria-selected="true"
+              >
+                <!-- <a class="nav-link"> -->
+                <i class="bi bi-briefcase me-2"></i>Empleo
+                <!-- </a> -->
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                [id]="'pills-participacion-tab' + i"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-participacion"
+                type="button"
+                role="tab"
+                aria-controls="pills-participacion"
+                aria-selected="false"
+              >
+                <!-- <a class="nav-link"> -->
+                <i class="bi bi-building me-2"></i>Participación en Empresas
+                <!-- </a> -->
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="pills-tabContent">
+            <div
+              class="tab-pane fade show active"
+              [id]="'pills-empleo' + i"
+              role="tabpanel"
+              [attr.aria-labelledby]="'pills-empleo-tab' + i"
+              tabindex="0"
+            >
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title mb-4">Información del Empleo Actual</h5>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <p class="text-muted mb-1">Ente Público</p>
+                        <p class="fw-bold">
+                          {{ item.empleo.nombreEntePublico }}
+                        </p>
+                      </div>
+                      <div class="mb-3">
+                        <p class="text-muted mb-1">Área de Adscripción</p>
+                        <p class="fw-bold">
+                          {{ item.empleo.areaAdscripcion }}
+                        </p>
+                      </div>
+                      <div class="mb-3">
+                        <p class="text-muted mb-1">Cargo</p>
+                        <p class="fw-bold">
+                          {{ item.empleo.empleoCargoComision }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <p class="text-muted mb-1">Función Principal</p>
+                        <p class="fw-bold">
+                          {{ item.empleo.funcionPrincipal }}
+                        </p>
+                      </div>
+                      <div class="mb-3">
+                        <p class="text-muted mb-1">Fecha de Toma de Posesión</p>
+                        <p class="fw-bold">
+                          {{ item.empleo.fechaTomaPosesion | date }}
+                        </p>
+                      </div>
+                      <div class="mb-3">
+                        <p class="text-muted mb-1">Teléfono de Oficina</p>
+                        <p class="fw-bold">
+                          {{ item.empleo.telefonoOficina.telefono }}
+                          <span class="text-muted">ext.</span>
+                          {{ item.empleo.telefonoOficina.extension }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              [id]="'pills-participacion' + i"
+              role="tabpanel"
+              [attr.aria-labelledby]="'pills-participacion-tab' + i"
+              tabindex="0"
+            >
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title mb-4">Participación en Empresas</h5>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <p class="text-muted mb-1">Nombre de la Empresa</p>
+                        <p class="fw-bold">
+                          {{
+                            item.participacion.nombreEmpresaSociedadAsociacion
+                          }}
+                        </p>
+                      </div>
+                      <div class="mb-3">
+                        <p class="text-muted mb-1">RFC</p>
+                        <p class="fw-bold">
+                          {{ item.participacion.rfc }}
+                        </p>
+                      </div>
+                      <div class="mb-3">
+                        <p class="text-muted mb-1">Tipo de Participación</p>
+                        <p class="fw-bold">
+                          {{ item.participacion.tipoParticipacion.valor }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <p class="text-muted mb-1">
+                          Porcentaje de Participación
+                        </p>
+                        <p class="fw-bold">
+                          {{ item.participacion.porcentajeParticipacion }}%
+                        </p>
+                      </div>
+                      <div class="mb-3">
+                        <p class="text-muted mb-1">Sector</p>
+                        <p class="fw-bold">
+                          {{ item.participacion.sector.valor }}
+                        </p>
+                      </div>
+                      <div class="mb-3">
+                        <p class="text-muted mb-1">Ubicación</p>
+                        <p class="fw-bold">
+                          {{
+                            item.participacion.ubicacion.entidadFederativa.valor
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="alert alert-info mt-3">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <span>Remuneración:</span>
+                    {{ item.participacion.recibeRemuneracion ? "Sí" : "No" }}
+                    recibe remuneración
+                    <span *ngIf="item.participacion.recibeRemuneracion">
+                      - Monto mensual:
+                      {{
+                        item.participacion.montoMensual.valor | currency : "MXN"
+                      }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

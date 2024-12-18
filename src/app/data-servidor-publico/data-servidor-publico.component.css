@@ -1,0 +1,14 @@
+/* servidor-publico.component.css */
+.nav-link {
+  color: #8e44ad;
+  cursor: pointer;
+}
+
+.nav-link.active {
+  color: #8e44ad;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #9b59b6;
+}
