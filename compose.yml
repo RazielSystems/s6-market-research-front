@@ -1,0 +1,5 @@
+services:
+  market-front:
+    build: .
+    ports:
+      - "4201:80"
