@@ -10,7 +10,7 @@ import { Modal } from 'bootstrap';
 })
 export class AppComponent implements OnInit {
   show_loading: boolean = false;
-  query: string = 'CDS070717H46';
+  query: string = '';
   resultados: Array<any> = [];
   url: string = 'http://172.20.30.161:4100/api/search';
   // url: string = 'http://localhost:4100/api/search';
