@@ -1,0 +1,99 @@
+<div *ngFor="let item of efos">
+  <!-- <pre>
+{{ item | json }}
+    </pre> -->
+  <div class="container mt-5">
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th scope="col">RFC</th>
+              <th scope="col">Nombre del Contribuyente</th>
+              <th scope="col">Situación del Contribuyente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="">
+              <td scope="row">{{ item.rfc }}</td>
+              <td>{{ item.nombredelcontribuyente }}</td>
+              <td>{{ item.situaciondelcontribuyente }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container mt-5" style="height: 50">
+        <h2 class="text-center mb-4">Línea de Tiempo</h2>
+        <div class="timeline-container">
+          <div class="timeline">
+            <div class="timeline-item timeline-item-left">
+              <div class="timeline-item-content">
+                <h6>Número y Fecha de Oficio Global de Presunción (SAT)</h6>
+                <p>
+                  {{ item.numeroyfechadeoficioglobaldepresuncionsat }}
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item timeline-item-right">
+              <div class="timeline-item-content">
+                <h6>Publicación en Página del SAT (Presuntos)</h6>
+                <p>{{ item.publicacionpaginasatpresuntos }}</p>
+              </div>
+            </div>
+
+            <div class="timeline-item timeline-item-left">
+              <div class="timeline-item-content">
+                <h6>Número y Fecha de Oficio Global de Presunción (DOF)</h6>
+                <p>
+                  {{ item.numeroyfechadeoficioglobaldepresunciondof }}
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item timeline-item-right">
+              <div class="timeline-item-content">
+                <h6>Publicación en DOF (Presuntos)</h6>
+                <p>{{ item.publicaciondofpresuntos }}</p>
+              </div>
+            </div>
+
+            <div class="timeline-item timeline-item-left">
+              <div class="timeline-item-content">
+                <h6>Número y Fecha de Oficio Global de Definitivos (SAT)</h6>
+                <p>
+                  {{ item.numeroyfechadeoficioglobaldedefinitivossat }}
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item timeline-item-right">
+              <div class="timeline-item-content">
+                <h6>Publicación en Página del SAT (Definitivos)</h6>
+                <p>{{ item.publicacionpaginasatdefinitivos }}</p>
+              </div>
+            </div>
+
+            <div class="timeline-item timeline-item-left">
+              <div class="timeline-item-content">
+                <h6>Número y Fecha de Oficio Global de Definitivos (DOF)</h6>
+                <p>
+                  {{ item.numeroyfechadeoficioglobaldedefinitivosdof }}
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item timeline-item-right">
+              <div class="timeline-item-content">
+                <h6>Publicación en DOF (Definitivos)</h6>
+                <p>{{ item.publicaciondofdefinitivos }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
