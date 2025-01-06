@@ -29,12 +29,12 @@
             <li class="nav-item">
               <button
                 class="nav-link active"
-                [id]="'pills-empleo-tab' + i"
+                [attr.id]="'pills-empleo-tab' + i"
                 data-bs-toggle="pill"
-                data-bs-target="#pills-empleo"
+                [attr.data-bs-target]="'#pills-empleo' + i"
                 type="button"
                 role="tab"
-                aria-controls="pills-empleo"
+                [attr.aria-controls]="'pills-empleo' + i"
                 aria-selected="true"
               >
                 <!-- <a class="nav-link"> -->
@@ -45,12 +45,12 @@
             <li class="nav-item">
               <button
                 class="nav-link"
-                [id]="'pills-participacion-tab' + i"
+                [attr.id]="'pills-participacion-tab' + i"
                 data-bs-toggle="pill"
-                data-bs-target="#pills-participacion"
+                [attr.data-bs-target]="'#pills-participacion' + i"
                 type="button"
                 role="tab"
-                aria-controls="pills-participacion"
+                [attr.aria-controls]="'pills-participacion' + i"
                 aria-selected="false"
               >
                 <!-- <a class="nav-link"> -->
@@ -63,7 +63,7 @@
           <div class="tab-content" id="pills-tabContent">
             <div
               class="tab-pane fade show active"
-              [id]="'pills-empleo' + i"
+              [attr.id]="'pills-empleo' + i"
               role="tabpanel"
               [attr.aria-labelledby]="'pills-empleo-tab' + i"
               tabindex="0"
@@ -120,7 +120,7 @@
             </div>
             <div
               class="tab-pane fade"
-              [id]="'pills-participacion' + i"
+              [attr.id]="'pills-participacion' + i"
               role="tabpanel"
               [attr.aria-labelledby]="'pills-participacion-tab' + i"
               tabindex="0"
