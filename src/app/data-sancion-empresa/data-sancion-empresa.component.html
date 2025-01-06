@@ -1,0 +1,125 @@
+<!-- <pre> {{ sanciones | json }}</pre> -->
+<div class="accordion" id="infoSanciones">
+  <div class="accordion-item" *ngFor="let item of sanciones; index as i">
+    <h2 class="accordion-header">
+      <button
+        class="accordion-button"
+        type="button"
+        data-bs-toggle="collapse"
+        [attr.data-bs-target]="'#collapse' + i"
+        aria-expanded="false"
+        [attr.aria-controls]="'collapse' + i"
+      >
+        {{ item.institucionDependencia.nombre }} ({{
+          item.institucionDependencia.siglas
+        }})
+      </button>
+    </h2>
+    <div
+      [attr.id]="'collapse' + i"
+      class="accordion-collapse collapse"
+      data-bs-parent="#infoSanciones"
+    >
+      <div class="accordion-body">
+        <div class="container">
+          <div class="row mb-4">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <p>
+                    <strong>Causa, motivo, hechos:</strong> <br />{{
+                      item.causaMotivoHechos
+                    }}
+                  </p>
+
+                  <p><strong>acto:</strong> <br />{{ item.acto }}</p>
+
+                  <p>
+                    <strong>Tipo de sanción:</strong> <br />{{
+                      item.tipoSancion.valor
+                    }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Particular Sancionado</h5>
+
+                  <p>
+                    <strong>Nombre, Razon social:</strong> <br />{{
+                      item.particularSancionado.nombreRazonSocial
+                    }}
+                  </p>
+
+                  <p>
+                    <strong>Objeto social:</strong> <br />{{
+                      item.particularSancionado.objetoSocial
+                    }}
+                  </p>
+
+                  <p>
+                    <strong>Tipo de persona:</strong> <br />{{
+                      item.particularSancionado.tipoPersona
+                    }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Responsable de la sancion</h5>
+                  <p>
+                    <strong>Nombre:</strong> <br />{{
+                      item.responsableSancion.nombre
+                    }}
+                  </p>
+
+                  <p>
+                    <strong>Primer apellido:</strong> <br />{{
+                      item.responsableSancion.primerApellido
+                    }}
+                  </p>
+
+                  <p>
+                    <strong>Segundo apellido:</strong> <br />{{
+                      item.responsableSancion.segundoApellido
+                    }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Resolución</h5>
+
+                  <p>
+                    <strong>Sentido:</strong> <br />{{
+                      item.resolucion.sentido
+                    }}
+                  </p>
+
+                  <p><strong>url:</strong> <br />{{ item.resolucion.url }}</p>
+
+                  <p>
+                    <strong>Fecha notificacion:</strong> <br />{{
+                      item.resolucion.fechaNotificacion
+                    }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
