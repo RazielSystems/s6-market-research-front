@@ -12,8 +12,10 @@ export class AppComponent implements OnInit {
   show_loading: boolean = false;
   query: string = '';
   resultados: Array<any> = [];
-  url: string = 'http://172.20.30.161:4100/api/search';
-  // url: string = 'http://localhost:4100/api/search';
+  //url: string = 'http://172.20.30.161:4100/api/search';
+  //url: string = 'http://localhost:4100/api/search';
+  url: string = 'https://dev-estudio-mercado.plataformadigitalnacional.org/back/api/search';
+  
 
   infoEFO: any | undefined;
   infoSP: any | undefined;
@@ -21,6 +23,8 @@ export class AppComponent implements OnInit {
   private modalInstance: Modal | undefined;
   private modalInstanceSP: Modal | undefined;
   private modalSanciones: Modal | undefined;
+
+  
 
   constructor(private http: HttpClient) {}
 

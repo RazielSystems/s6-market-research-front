@@ -1,103 +1,463 @@
-/* Estilos globales */
+/* Base styles */
 body {
   font-family: 'Arial', sans-serif;
-  color: #333;
+  margin: 0;
+  min-height: 100vh;
+  background: #fdfaff;
 }
 
-/* Header */
-.bg-gradient-purple {
-  background: linear-gradient(90deg, #6a1b9a, #8e24aa);
+/* Header Navigation */
+.header-nav {
+  background: transparent linear-gradient(230deg,#1c7cbf,#1c7cbf 4%,#9f58e2 49%,#6d4061) 0 0 no-repeat padding-box;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.logo {
-  max-height: 50px;
+.nav-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-h1 {
-  font-size: 1.5rem;
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-/* Barra de búsqueda */
-.search-bar input {
-  border: 2px solid #8e24aa;
-  border-radius: 30px;
+.nav-logo {
+  height: 2rem;
+  width: auto;
+}
+
+.nav-title {
+  color: white;
+  font-size: 1.25rem;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-button {
+  color: white;
+  background: none;
+  border: none;
   padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* Tabla */
-.bg-purple {
-  background-color: #8e24aa !important;
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
 }
 
-.icon {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(to right, #f3e8ff, #f5f3ff);
+  padding: 6rem 1rem;
+  transition: all 0.3s ease;
 }
 
-.icon-ghost {
-  background: url('../assets/empresa-fantasma.svg') no-repeat center center;
+.hero-section.compact {
+  padding: 1.5rem 1rem;
 }
 
-.icon-sat {
-  background: url('../assets/deudor-sat.svg') no-repeat center center;
+.hero-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+  transition: all 0.3s ease;
 }
 
-.icon-judge {
-  background: url('../assets/sancionado.svg') no-repeat center center;
+.hero-content.results-mode {
+  max-width: 800px;
 }
 
-.icon-ban {
-  background: url('../assets/inhabilitado.svg') no-repeat center center;
+.hero-title {
+  color: #562d61;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  font-weight: 700;
 }
 
-.badge-success {
-  /* background-color: #4caf50 !important; */
-  background: url('../assets/vigente.svg') no-repeat center center;
+.hero-description {
+  color: #9564b3;
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
 }
 
-.badge-danger {
-  /* background-color: #f44336 !important; */
-  background: url('../assets/no-vigente.svg') no-repeat center center;
-
+.hero-title.hidden,
+.hero-description.hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  position: absolute;
+  pointer-events: none;
 }
 
-/* Contrato */
-.contract-info {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-}
-
-
-/* Spinner */
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 6px solid #e0e0e0;
-  /* Color del borde externo */
-  border-top: 6px solid #8e24aa;
-  /* Color del borde animado */
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+/* Search Component */
+.search-container {
+  max-width: 32rem;
   margin: 0 auto;
 }
 
-/* Animación */
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
-  100% {
+.search-input {
+  width: 100%;
+  padding: 1rem 4rem 1rem 1.5rem;
+  border: 2px solid #e9d5ff;
+  border-radius: 9999px;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+.search-button {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.5rem;
+  background-color: #6a1b9a;
+  border: none;
+  border-radius: 9999px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-button:hover {
+  background-color: #4a1259;
+}
+
+/* Results Section */
+.results-section {
+  opacity: 0;
+  background: #fdfaff;
+  transform: translateY(20px);
+  animation: fadeInUp 0.3s ease forwards;
+  padding: 2rem 1rem;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table th {
+  background: #713972;
+  color: white;
+  font-weight: 700;
+  text-align: left;
+  padding: .4rem .5rem;
+  border-bottom: 1px solid #ccc;
+  text-transform: uppercase;
+  font-size: .8em;
+  vertical-align: middle;
+}
+
+/* .table th {
+  background: #f9f9f9;
+  color: rgb(114 45 155);
+  font-weight: 500;
+  text-align: left;
+  padding: .4rem .5rem;
+  border-bottom: 1px solid #ccc;
+} */
+
+
+
+.table td {
+  padding: .3rem;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: .875rem;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background: #f9fafb;
+}
+
+
+
+/* Loading Spinner */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+}
+
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid #e9d5ff;
+  border-top-color: #6a1b9a;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  margin-top: 1rem;
+  color: #6b7280;
+}
+
+@keyframes spin {
+  to {
     transform: rotate(360deg);
   }
 }
 
-/* Texto de cargando */
-.loading-text {
-  margin-top: 10px;
-  font-size: 1rem;
-  color: #666;
+/* Modal Styles */
+.modal-xl .modal-dialog {
+  max-width: 1140px;
+}
+
+.btn-danger:hover {
+  background-color: #713972;
+  border-color: #713972;
+}
+
+.btn-danger {
+  background-color: #9c58e1;
+  border-color: #9c58e1;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .nav-title {
+    font-size: 1rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-section {
+    padding: 4rem 1rem;
+  }
+
+  .hero-section.compact {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-title {
+    display: none;
+  }
+}
+
+.table-hover tbody tr:hover {
+  background-color: #ffffff; /* Cambia este color al que desees */
+}
+
+.table {
+  --bs-table-hover-bg:rgb(189 140 191 / 8%);
+}
+
+/* Aseguramos el box-sizing */
+* {
+  box-sizing: border-box;
+}
+
+.card {
+  background-color: white; /* Fondo blanco para que sobresalga */
+  border: 1px solid #e0e0e0; /* Borde sutil */
+  border-radius: 0.8rem; /* Bordes suavizados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Aseguramos que el contenido no se salga */
+}
+
+.card-body {
+  padding: 1rem; /* Padding interno del card */
+}
+
+.table-responsive {
+  margin: -1rem; /* Ajustamos margen para que la tabla se alinee correctamente */
+
+  overflow-x: auto; /* Hacemos la tabla responsive */
+}
+
+.table-hover tbody tr:hover {
+  background-color: #ffffff; /* Cambia este color al que desees */
+}
+
+.table {
+  margin: 0; /* Sin margen */
+  border-radius: 0.5rem; /* Bordes suavizados */
 }
 
 
+/* thead tr::after {
+  content: "";
+  display: block;
+  height: 3px;
+  background: linear-gradient(230deg, #1c7cbf, #1c7cbf 4%, #9f58e2 49%, #6d4061);
+  margin-top: -3px;
+} */
+
+
+/* Modal Styles */
+.modal-header {
+  background: linear-gradient(230deg,#1c7cbf,#1c7cbf 4%,#9f58e2 49%,#6d4061);
+  color: white;
+  border: none;
+  padding: 1rem;
+}
+
+.modal-title {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.modal-content {
+  border: none;
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+/* Tabs en Modal */
+.modal-tabs {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+}
+
+.modal-tab {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #6b7280;
+  border: none;
+  background: none;
+  transition: color 0.3s;
+}
+
+.modal-tab.active {
+  color: #9f58e2;
+}
+
+.modal-tab-indicator {
+  position: absolute;
+  bottom: -1px;
+  height: 2px;
+  width: 50%;
+  background: #9f58e2;
+  transition: transform 0.3s ease;
+}
+
+/* Campos de información */
+.info-field {
+  margin-bottom: 1rem;
+}
+
+.info-field label {
+  display: block;
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.info-field-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-field-icon {
+  color: #9f58e2;
+}
+
+/* Info box para remuneración */
+.info-box {
+  background-color: #f8f5ff;
+  border: 1px solid #e9d5ff;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.info-box-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6b7280;
+}
+
+.info-box-dot {
+  color: #9f58e2;
+}
+
+/* Aplicar fondo diferente a las filas pares */
+.table-responsive table tbody tr:nth-child(even) {
+  background-color: #f8f7f9; /* Color de fondo para filas pares */
+}
+
+
+.table>:not(caption)>*>* {
+  background-color: rgb(255 255 255 / 0%);
+}
+
+
+.table>thead {
+  background: #713972;
+}

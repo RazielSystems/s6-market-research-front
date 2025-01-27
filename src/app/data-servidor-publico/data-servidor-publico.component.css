@@ -12,3 +12,69 @@
 .nav-link:hover {
   color: #9b59b6;
 }
+
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  color: #666;
+  position: relative;
+  padding: 0.75rem 1rem;
+  transition: color 0.3s;
+}
+
+.nav-tabs .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #9333ea;
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.nav-tabs .nav-link.active {
+  border: none;
+  color: #bc5ec7;
+}
+
+.nav-tabs .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.nav-tabs .nav-link:hover {
+  border: none;
+  color: #bc5ec7;
+}
+
+.accordion-button:not(.collapsed) {
+  --bs-accordion-active-bg: #faf5ff;
+    color: #6b4b78;
+    font-weight: 700;
+}
+
+.accordion {
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgb(95 35 151 / 38%);
+}
+
+.tab-pane > .card {
+  background: #faf5ff;
+  border: none;
+}
+
+.tab-pane .card-body p {
+  font-size: .875rem;
+  line-height: 1.25rem;
+}
+
+.alert-info {
+  --bs-alert-color: #ffffff;
+  --bs-alert-bg: rgb(133 78 131);
+  --bs-alert-border-color: #ffffff;
+  --bs-alert-link-color: #ffbceb;
+}
