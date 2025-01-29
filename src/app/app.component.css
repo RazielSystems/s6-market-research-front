@@ -1,10 +1,33 @@
-/* Base styles */
+/* Base styles 
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   min-height: 100vh;
   background: #fdfaff;
+  background: #ffffff url(src/assets/pexels-jesus-toledo.jpg) center center/cover no-repeat;
+}*/
+
+/* Estilo del body principal */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background: 
+  /*  url('src/assets/pattern.png') center center/cover repeat, Patrón de píxeles */
+  /*  url('src/assets/jorge-aguilar.jpg') center center/cover no-repeat;  Imagen de fondo */
+  /*  background-blend-mode: overlay;  Mezcla el patrón y la imagen de fondo */
+  /*  filter: blur(8px) opacity(0.7);  Aplica el desenfoque y la opacidad */
 }
+
+
+
+
+
+
+
+
+
+
 
 /* Header Navigation */
 .header-nav {
@@ -70,7 +93,7 @@ body {
 
 /* Hero Section */
 .hero-section {
-  background: linear-gradient(to right, #f3e8ff, #f5f3ff);
+  background: linear-gradient(to right, #f3e8fff2, #f5f3ffc9);
   padding: 6rem 1rem;
   transition: all 0.3s ease;
 }
@@ -164,7 +187,7 @@ body {
 /* Results Section */
 .results-section {
   opacity: 0;
-  background: #fdfaff;
+  background: #fdfdfdbf;
   transform: translateY(20px);
   animation: fadeInUp 0.3s ease forwards;
   padding: 2rem 1rem;
