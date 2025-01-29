@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
 import { Modal } from 'bootstrap';
 
 @Component({
@@ -10,21 +9,19 @@ import { Modal } from 'bootstrap';
 })
 export class AppComponent implements OnInit {
   show_loading: boolean = false;
+  showNoResults: boolean = false;
   query: string = '';
   resultados: Array<any> = [];
   //url: string = 'http://172.20.30.161:4100/api/search';
   //url: string = 'http://localhost:4100/api/search';
   url: string = 'https://dev-estudio-mercado.plataformadigitalnacional.org/back/api/search';
   
-
   infoEFO: any | undefined;
   infoSP: any | undefined;
   infoSanciones: any | undefined;
   private modalInstance: Modal | undefined;
   private modalInstanceSP: Modal | undefined;
   private modalSanciones: Modal | undefined;
-
-  
 
   constructor(private http: HttpClient) {}
 
@@ -53,6 +50,7 @@ export class AppComponent implements OnInit {
     console.log('query: ', this.query);
     this.resultados = [];
     this.show_loading = true;
+    this.showNoResults = false;
 
     const body = { query: this.query, page, pageSize };
     const options = {};
@@ -61,7 +59,18 @@ export class AppComponent implements OnInit {
       this.resultados = r.resp;
       this.show_loading = false;
       console.log('this.resultados: ', this.resultados);
+      
+      // Muestra el mensaje de no resultados si el arreglo está vacío
+      if (this.resultados.length === 0) {
+        this.showNoResults = true;
+      }
     });
+  }
+
+  clearSearch() {
+    this.query = '';
+    this.showNoResults = false;
+    this.resultados = [];
   }
 
   openModal(efo: any) {

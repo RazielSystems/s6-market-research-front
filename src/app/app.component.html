@@ -1,4 +1,3 @@
-<!-- app.component.html -->
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -49,84 +48,92 @@
       </div>
     </div>
 
-<!-- Results Table Section -->
-<section class="results-section" *ngIf="resultados.length > 0 || show_loading">
-  <div class="container">
-    <div class="card" *ngIf="!show_loading">
-      <div class="card-body">
-        <div class="table-responsive"> <!-- Añadimos una clase contenedora -->
-          <table class="table table-hover m-0">
-            <thead class="table-dark bg-purple text-white">
-              <tr>
-                <th>OCID</th>
-                <th>RFC</th>
-                <th>Empresa</th>
-                <th>Título de adjudicación</th>
-                <th>Artículo licitado</th>
-                <th>Cantidad</th>
-                <th>Costo</th>
-                <th>Esta registrada como EFO</th>
-                <th>Servidores Publicos Relacionados</th>
-                <th>Sanciones</th>
-              </tr>
-            </thead>
-            <tbody class="table-group-divider">
-              <tr *ngFor="let item of resultados">
-                <td>{{ item.ocid }}</td>
-                <td>{{ item.suppliers.id }}</td>
-                <td>{{ item.suppliers.name }}</td>
-                <td>{{ item.title }}</td>
-                <td>{{ item.description }}</td>
-                <td>{{ item.quantity }}</td>
-                <td>{{ item.unit.value.amount }} {{ item.unit.value.currency }}</td>
-                <td>
-                  <div *ngIf="item.efos.length">
-                    <button type="button" class="btn btn-danger position-relative" (click)="openModal(item.efos)">
-                      <i class="bi bi-eye"></i>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <div *ngIf="item.servidores_publicos.length">
-                    <button type="button" class="btn btn-danger position-relative" (click)="openModalSP(item.servidores_publicos)">
-                      <i class="bi bi-eye"></i>
-                      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
-                        {{ item.servidores_publicos.length }}
-                        <span class="visually-hidden">unread messages</span>
-                      </span>
-                    </button>
-                  </div>
-                </td>
-                <td>
-                  <div *ngIf="item.sanciones.length">
-                    <button type="button" class="btn btn-danger position-relative" (click)="openModalSanciones(item.sanciones)">
-                      <i class="bi bi-eye"></i>
-                      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
-                        {{ item.sanciones.length }}
-                        <span class="visually-hidden">unread messages</span>
-                      </span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr class="text-center" *ngIf="resultados.length === 0">
-                <td colspan="10"><strong>Sin resultados</strong></td>
-              </tr>
-            </tbody>
-          </table>
+    <!-- Results Table Section -->
+    <section class="results-section" *ngIf="resultados.length > 0 || show_loading || showNoResults">
+      <div class="container">
+        <!-- No Results Message -->
+        <div class="card no-result" *ngIf="showNoResults && !show_loading">
+          <div class="card-body text-center py-5">
+            <div class="no-results-container">
+              <i class="bi bi-search mb-3"></i>
+              <h4 class="mb-3">No se encontraron resultados</h4>
+              <p class="text-muted mb-2"></p>
+              <p class="text-muted">Por favor intenta con otros términos de búsqueda</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Table -->
+        <div class="card" *ngIf="resultados.length > 0 && !show_loading">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover m-0">
+                <thead class="table-dark bg-purple text-white">
+                  <tr>
+                    <th>OCID</th>
+                    <th>RFC</th>
+                    <th>Empresa</th>
+                    <th>Título de adjudicación</th>
+                    <th>Artículo licitado</th>
+                    <th>Cantidad</th>
+                    <th>Costo</th>
+                    <th>Esta registrada como EFO</th>
+                    <th>Servidores Publicos Relacionados</th>
+                    <th>Sanciones</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr *ngFor="let item of resultados">
+                    <td>{{ item.ocid }}</td>
+                    <td>{{ item.suppliers.id }}</td>
+                    <td>{{ item.suppliers.name }}</td>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.unit.value.amount }} {{ item.unit.value.currency }}</td>
+                    <td>
+                      <div *ngIf="item.efos.length">
+                        <button type="button" class="btn btn-danger position-relative" (click)="openModal(item.efos)">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngIf="item.servidores_publicos.length">
+                        <button type="button" class="btn btn-danger position-relative" (click)="openModalSP(item.servidores_publicos)">
+                          <i class="bi bi-eye"></i>
+                          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                            {{ item.servidores_publicos.length }}
+                            <span class="visually-hidden">unread messages</span>
+                          </span>
+                        </button>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngIf="item.sanciones.length">
+                        <button type="button" class="btn btn-danger position-relative" (click)="openModalSanciones(item.sanciones)">
+                          <i class="bi bi-eye"></i>
+                          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                            {{ item.sanciones.length }}
+                            <span class="visually-hidden">unread messages</span>
+                          </span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Loading spinner -->
-  <div class="loading-container" *ngIf="show_loading">
-    <div class="spinner"></div>
-    <p class="loading-text">Cargando resultados...</p>
-  </div>
-</section>
-
-
+      <!-- Loading spinner -->
+      <div class="loading-container" *ngIf="show_loading">
+        <div class="spinner"></div>
+        <p class="loading-text">Cargando resultados...</p>
+      </div>
+    </section>
 
     <!-- Modals -->
     <!-- Modal EFOS -->
@@ -142,7 +149,7 @@
           </div>
         </div>
       </div>
-     </div>
+    </div>
 
     <!-- Modal Servidores Publicos -->
     <div class="modal modal-xl fade" id="modalSP" tabindex="-1">
@@ -157,7 +164,7 @@
           </div>
         </div>
       </div>
-     </div>
+    </div>
 
     <!-- Modal Sanciones -->
     <div class="modal modal-xl fade" id="modalSanciones" tabindex="-1">
@@ -172,6 +179,6 @@
           </div>
         </div>
       </div>
-     </div>
+    </div>
   </body>
 </html>

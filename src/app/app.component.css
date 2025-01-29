@@ -484,3 +484,45 @@ body {
 .table>thead {
   background: #713972;
 }
+
+
+/* Estilos para cuando no hay resultados */
+.no-results-container {
+  padding: .5rem;
+}
+
+.no-result i {
+  font-size: 3rem; 
+  color: #814994;
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card.no-result {
+  background-color: #f6f4ff;
+  border: 1px solid #e5d3e2;
+  border-radius: 20px;
+}
+ 
+.card.no-result .card-body {
+  padding: 1rem;
+}
+ 
+
+.btn-primary {
+  padding: 0.5rem 1.5rem;
+}
+
+.no-result h4 {
+  color: #814994;
+  font-weight: 700;
+}
+
+.no-result .text-muted {
+  color: #5a4855;
+  font-size: 1.125rem;
+  transition: all 0.3s ease;
+}
