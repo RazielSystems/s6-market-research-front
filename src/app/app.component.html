@@ -90,7 +90,7 @@
                     <td>{{ item.title }}</td>
                     <td>{{ item.description }}</td>
                     <td>{{ item.quantity }}</td>
-                    <td>{{ item.unit.value.amount }} {{ item.unit.value.currency }}</td>
+                    <td>{{ item.unit.value.amount | currency : item.unit.value.currency : '$ ' }} {{ item.unit.value.currency }}</td>
                     <td>
                       <div *ngIf="item.efos.length">
                         <button type="button" class="btn btn-danger position-relative" (click)="openModal(item.efos)">
