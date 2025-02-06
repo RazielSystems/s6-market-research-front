@@ -48,92 +48,131 @@
       </div>
     </div>
 
-    <!-- Results Table Section -->
-    <section class="results-section" *ngIf="resultados.length > 0 || show_loading || showNoResults">
-      <div class="container">
-        <!-- No Results Message -->
-        <div class="card no-result" *ngIf="showNoResults && !show_loading">
-          <div class="card-body text-center py-5">
-            <div class="no-results-container">
-              <i class="bi bi-search mb-3"></i>
-              <h4 class="mb-3">No se encontraron resultados</h4>
-              <p class="text-muted mb-2"></p>
-              <p class="text-muted">Por favor intenta con otros términos de búsqueda</p>
+<!-- Results Section -->
+<section class="results-section" *ngIf="resultados.length > 0 || show_loading || showNoResults">
+  <div class="container">
+    <!-- No Results Message -->
+    <div class="card no-result" *ngIf="showNoResults && !show_loading">
+      <div class="card-body text-center py-5">
+        <div class="no-results-container">
+          <i class="bi bi-search mb-3"></i>
+          <h4 class="mb-3">No se encontraron resultados</h4>
+          <p class="text-muted">Por favor intenta con otros términos de búsqueda</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Grid -->
+
+<!-- Results Grid -->
+<div class="row g-4" *ngIf="resultados.length > 0 && !show_loading">
+  <div class="col-md-6 col-lg-4" *ngFor="let item of resultados">
+    <div class="card h-100 result-card">
+      <div class="card-body d-flex justify-content-between flex-column p-0">
+        <div class="justify-content-between flex-column">
+          <div class="company-section mb-4">
+            <div class="d-flex align-items-center gap-3">
+              <div class="company-icon">
+                <i class="bi bi-building-fill"></i>
+              </div>
+              <div class="mx-4 mt-4">
+                <h5 class="company-name mb-1">{{ item.suppliers.name }}</h5>
+                <div class="d-flex align-items-center text-muted">
+                  <i class="bi bi-upc me-2"></i>
+                  <span class="rfc">RFC: {{ item.suppliers.id }}</span>
+                </div>
+              </div>
             </div>
+          </div>
+  
+          <div class="content-section mb-4 mx-4">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-box-seam-fill text-primary me-2"></i>
+              <h6 class="mb-0 text-uppercase fw-bold">Artículo licitado</h6>
+            </div>
+            <p class="description mb-0">{{ item.description }}</p>
+          </div>
+        </div>
+        <div class="mx-4">
+          <div class="price-section d-flex justify-content-end flex-column">
+            <div class="d-flex justify-content-start mb-1">
+              <i class="bi bi-currency-dollar text-primary me-2"></i>
+              <h6 class="mb-0 text-uppercase fw-bold">Costo</h6>
+            </div>
+            <p class="price mb-3 d-flex justify-content-end">
+              {{ item.unit.value.amount | number:'1.2-2' }} 
+              <span class="currency">{{ item.unit.value.currency }}</span>
+            </p>
+          </div>
+  
+          <div class="badge-section d-flex m-2">
+            <div *ngIf="item.efos.length" class="mx-1">
+              <button 
+                type="button" 
+                class="badge-content position-relative" 
+                (click)="openModal(item.efos)"
+              >
+                <i class="bi bi-exclamation-circle-fill text-warning"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge bg-warning">
+                  {{ item.efos.length }}
+                  <span class="visually-hidden">unread messages</span>
+                </span>  
+              </button>
+            </div>
+
+            <div *ngIf="item.servidores_publicos.length" class="mx-2">
+              <button 
+                type="button" 
+                class="badge-content position-relative" 
+                (click)="openModalSP(item.servidores_publicos)"
+              >
+                <i class="bi bi-person-fill text-success"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge bg-success">
+                  {{ item.servidores_publicos.length }}
+                  <span class="visually-hidden">unread messages</span>
+                </span> 
+              </button>
+            </div>
+            
+            <div *ngIf="item.sanciones.length" class="mx-2">
+              <button 
+                type="button" 
+                class="badge-content position-relative" 
+                (click)="openModalSanciones(item.sanciones)"
+              >
+                <i class="bi bi-shield-fill-exclamation text-danger"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge bg-danger">
+                  {{ item.sanciones.length }}
+                  <span class="visually-hidden">unread messages</span>
+                </span> 
+              </button>
+            </div>          
           </div>
         </div>
 
-        <!-- Results Table -->
-        <div class="card" *ngIf="resultados.length > 0 && !show_loading">
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-hover m-0">
-                <thead class="table-dark bg-purple text-white">
-                  <tr>
-                    <th>OCID</th>
-                    <th>RFC</th>
-                    <th>Empresa</th>
-                    <th>Título de adjudicación</th>
-                    <th>Artículo licitado</th>
-                    <th>Cantidad</th>
-                    <th>Costo</th>
-                    <th>Esta registrada como EFO</th>
-                    <th>Servidores Publicos Relacionados</th>
-                    <th>Sanciones</th>
-                  </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                  <tr *ngFor="let item of resultados">
-                    <td>{{ item.ocid }}</td>
-                    <td>{{ item.suppliers.id }}</td>
-                    <td>{{ item.suppliers.name }}</td>
-                    <td>{{ item.title }}</td>
-                    <td>{{ item.description }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>{{ item.unit.value.amount }} {{ item.unit.value.currency }}</td>
-                    <td>
-                      <div *ngIf="item.efos.length">
-                        <button type="button" class="btn btn-danger position-relative" (click)="openModal(item.efos)">
-                          <i class="bi bi-eye"></i>
-                        </button>
-                      </div>
-                    </td>
-                    <td>
-                      <div *ngIf="item.servidores_publicos.length">
-                        <button type="button" class="btn btn-danger position-relative" (click)="openModalSP(item.servidores_publicos)">
-                          <i class="bi bi-eye"></i>
-                          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
-                            {{ item.servidores_publicos.length }}
-                            <span class="visually-hidden">unread messages</span>
-                          </span>
-                        </button>
-                      </div>
-                    </td>
-                    <td>
-                      <div *ngIf="item.sanciones.length">
-                        <button type="button" class="btn btn-danger position-relative" (click)="openModalSanciones(item.sanciones)">
-                          <i class="bi bi-eye"></i>
-                          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
-                            {{ item.sanciones.length }}
-                            <span class="visually-hidden">unread messages</span>
-                          </span>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        
       </div>
 
-      <!-- Loading spinner -->
-      <div class="loading-container" *ngIf="show_loading">
-        <div class="spinner"></div>
-        <p class="loading-text">Cargando resultados...</p>
+      <div class="card-footer bg-transparent border-0 pt-0">
+        <button class="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2" 
+                (click)="openModalDetalles(item)">
+          <i class="bi bi-eye-fill"></i>
+          Ver detalles
+        </button>
       </div>
-    </section>
+    </div>
+  </div>
+</div>
+
+    <!-- Loading spinner -->
+    <div class="loading-container" *ngIf="show_loading">
+      <div class="spinner"></div>
+      <p class="loading-text">Cargando resultados...</p>
+    </div>
+  </div>
+
+
+</section>
 
     <!-- Modals -->
     <!-- Modal EFOS -->
@@ -180,5 +219,74 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal Detalles -->
+    <div class="modal modal-xl fade" id="modalDetalles" tabindex="-1" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-purple text-white">
+            <h5 class="modal-title">Detalles de la Contratación</h5>
+            <button type="button" class="btn-close btn-close-white" (click)="closeModalDetalles()"></button>
+          </div>
+          <div class="modal-body p-4" >
+            <!-- <div class="row g-4" *ngIf="selectedItem">
+              <div class="col-md-6">
+                <div class="card border-0 bg-light h-100">
+                  <div class="card-body">
+                    <h6 class="card-subtitle mb-3">Información General</h6>
+                    <div class="info-item mb-3">
+                      <label class="text-muted d-block mb-1">OCID</label>
+                      <p class="mb-0">{{ selectedItem.ocid }}</p>
+                    </div>
+                    <div class="info-item mb-3">
+                      <label class="text-muted d-block mb-1">Título de adjudicación</label>
+                      <p class="mb-0">{{ selectedItem.title }}</p>
+                    </div>
+                    <div class="info-item">
+                      <label class="text-muted d-block mb-1">Cantidad</label>
+                      <p class="mb-0">{{ selectedItem.quantity }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card border-0 bg-light h-100">
+                  <div class="card-body">
+                    <h6 class="card-subtitle mb-3">Información Adicional</h6>
+                    <div class="d-flex flex-column gap-3">
+                      <div *ngIf="selectedItem.efos.length">
+                        <button type="button" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2" 
+                                (click)="openModal(selectedItem.efos)">
+                          <i class="bi bi-exclamation-circle-fill"></i> 
+                          Información EFO
+                        </button>
+                      </div>
+                      <div *ngIf="selectedItem.servidores_publicos.length">
+                        <button type="button" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2" 
+                                (click)="openModalSP(selectedItem.servidores_publicos)">
+                          <i class="bi bi-person-fill"></i> 
+                          Servidores Públicos
+                          <span class="badge bg-danger">{{ selectedItem.servidores_publicos.length }}</span>
+                        </button>
+                      </div>
+                      <div *ngIf="selectedItem.sanciones.length">
+                        <button type="button" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2" 
+                                (click)="openModalSanciones(selectedItem.sanciones)">
+                          <i class="bi bi-shield-fill-exclamation"></i>
+                          Sanciones
+                          <span class="badge bg-danger">{{ selectedItem.sanciones.length }}</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </body>
 </html>

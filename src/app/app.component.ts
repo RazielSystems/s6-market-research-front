@@ -16,9 +16,11 @@ export class AppComponent implements OnInit {
   //url: string = 'http://localhost:4100/api/search';
   url: string = 'https://dev-estudio-mercado.plataformadigitalnacional.org/back/api/search';
   
+  infoDetalles: any | undefined;
   infoEFO: any | undefined;
   infoSP: any | undefined;
   infoSanciones: any | undefined;
+  private modalDetalles: Modal | undefined;
   private modalInstance: Modal | undefined;
   private modalInstanceSP: Modal | undefined;
   private modalSanciones: Modal | undefined;
@@ -30,6 +32,7 @@ export class AppComponent implements OnInit {
     const modalElement = document.getElementById('modalEFOS');
     const modalElementSP = document.getElementById('modalSP');
     const modalSanciones = document.getElementById('modalSanciones');
+    const modalDetalles = document.getElementById('modalDetalles');
 
     if (modalElement) {
       this.modalInstance = new Modal(modalElement);
@@ -41,6 +44,10 @@ export class AppComponent implements OnInit {
 
     if (modalSanciones) {
       this.modalSanciones = new Modal(modalSanciones);
+    }
+
+    if (modalDetalles) {
+      this.modalDetalles = new Modal(modalDetalles);
     }
   }
 
@@ -73,18 +80,19 @@ export class AppComponent implements OnInit {
     this.resultados = [];
   }
 
+
   openModal(efo: any) {
     if (this.modalInstance) {
       this.infoEFO = efo;
       this.modalInstance.show();
     }
   }
-
   closeModal() {
     if (this.modalInstance) {
       this.modalInstance.hide();
     }
   }
+
 
   openModalSP(sp: any) {
     if (this.modalInstanceSP) {
@@ -92,12 +100,12 @@ export class AppComponent implements OnInit {
       this.modalInstanceSP.show();
     }
   }
-
   closeModalSP() {
     if (this.modalInstanceSP) {
       this.modalInstanceSP.hide();
     }
   }
+
 
   openModalSanciones(data: any) {
     if (this.modalSanciones) {
@@ -105,10 +113,24 @@ export class AppComponent implements OnInit {
       this.modalSanciones.show();
     }
   }
-
   closeModalSanciones() {
     if (this.modalSanciones) {
       this.modalSanciones.hide();
     }
   }
+
+
+  openModalDetalles(data: any) {
+    if (this.modalDetalles) {
+      this.infoDetalles = data;
+      this.modalDetalles.show();
+    }
+  }
+  closeModalDetalles() {
+    if (this.modalDetalles) {
+      this.modalDetalles.hide();
+    }
+  }
+
+
 }

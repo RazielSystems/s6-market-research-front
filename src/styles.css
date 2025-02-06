@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --efo: rgb(245, 177, 107);
+  --sp: rgb(77, 204, 185);
+  --sancionado: rgb(243, 120, 120);
+}
+
