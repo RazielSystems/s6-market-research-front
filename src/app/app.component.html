@@ -70,7 +70,7 @@
     <div class="card h-100 result-card">
       <div class="card-body d-flex justify-content-between flex-column p-0">
         <div class="justify-content-between flex-column">
-          <div class="company-section mb-4">
+          <div class="company-section mb-4 pb-3">
             <div class="d-flex align-items-center gap-3">
               <div class="company-icon">
                 <i class="bi bi-building-fill"></i>
@@ -133,7 +133,7 @@
                 </span> 
               </button>
             </div>
-            
+
             <div *ngIf="item.sanciones.length" class="mx-2">
               <button 
                 type="button" 
@@ -221,67 +221,130 @@
     </div>
 
     <!-- Modal Detalles -->
-    <div class="modal modal-xl fade" id="modalDetalles" tabindex="-1" >
+    <div class="modal modal-xl fade" id="modalDetalles" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header bg-purple text-white">
             <h5 class="modal-title">Detalles de la Contratación</h5>
             <button type="button" class="btn-close btn-close-white" (click)="closeModalDetalles()"></button>
           </div>
-          <div class="modal-body p-4" >
-            <!-- <div class="row g-4" *ngIf="selectedItem">
-              <div class="col-md-6">
+          <div class="modal-body p-4">
+            <div class="row g-4" *ngIf="infoDetalles">
+              <!-- Columna de Botones -->
+              <div class="col-md-3">
+                <div class="d-flex flex-column gap-3">
+                  <!-- Botón Información General -->
+                  <button type="button" 
+                          class="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center gap-2"
+                          (click)="toggleGeneralInfo()">
+                    <i class="bi bi-info-circle-fill"></i>
+                    Información General
+                    <i class="bi" [ngClass]="showGeneralInfo ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+                  </button>
+    
+                  <!-- Botón EFOS -->
+                  <div *ngIf="infoDetalles.efos.length">
+                    <button type="button" 
+                            class="btn btn-outline-warning w-100 d-flex align-items-center justify-content-center gap-2"
+                            (click)="toggleEfosInfo()">
+                      <i class="bi bi-exclamation-circle-fill"></i>
+                      Información EFO
+                      <i class="bi" [ngClass]="showEfosInfo ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+                    </button>
+                  </div>
+    
+                  <!-- Botón Servidores Públicos y su lista -->
+                  <div *ngIf="infoDetalles.servidores_publicos.length" class="mb-3">
+                    <button type="button" 
+                            class="btn btn-outline-success w-100 d-flex align-items-center justify-content-center gap-2"
+                            (click)="toggleServidoresInfo()">
+                      <i class="bi bi-person-fill"></i>
+                      Servidores Públicos
+                      <span class="badge bg-success">{{ infoDetalles.servidores_publicos.length }}</span>
+                      <i class="bi" [ngClass]="showServidoresInfo ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+                    </button>
+                    
+                    <!-- Lista de servidores -->
+                    <div class="list-group mt-2" *ngIf="showServidoresInfo">
+                      <button *ngFor="let servidor of infoDetalles.servidores_publicos"
+                              class="list-group-item list-group-item-action"
+                              [class.active]="selectedServidor === servidor"
+                              (click)="selectServidor(servidor)">
+                        {{ servidor.declarante.nombre }}
+                        {{ servidor.declarante.primerApellido }}
+                        {{ servidor.declarante.segundoApellido }}
+                      </button>
+                    </div>
+                  </div>
+    
+                  <!-- Botón Sanciones -->
+                  <div *ngIf="infoDetalles.sanciones.length">
+                    <button type="button" 
+                            class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2"
+                            (click)="toggleSancionesInfo()">
+                      <i class="bi bi-shield-fill-exclamation"></i>
+                      Sanciones
+                      <span class="badge bg-danger">{{ infoDetalles.sanciones.length }}</span>
+                      <i class="bi" [ngClass]="showSancionesInfo ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+    
+              <!-- Columna de Contenido -->
+              <div class="col-md-9">
                 <div class="card border-0 bg-light h-100">
                   <div class="card-body">
-                    <h6 class="card-subtitle mb-3">Información General</h6>
-                    <div class="info-item mb-3">
-                      <label class="text-muted d-block mb-1">OCID</label>
-                      <p class="mb-0">{{ selectedItem.ocid }}</p>
+                    <!-- Información General (mostrada por defecto) -->
+                    <div *ngIf="showGeneralInfo">
+                      <div class="info-item mb-3">
+                        <label class="text-muted d-block mb-1">Nombre de la Compañía</label>
+                        <p class="mb-0">{{ infoDetalles.suppliers.name }}</p>
+                      </div>
+                      <div class="info-item mb-3">
+                        <label class="text-muted d-block mb-1">OCID</label>
+                        <p class="mb-0">{{ infoDetalles.ocid }}</p>
+                      </div>
+                      <div class="info-item mb-3">
+                        <label class="text-muted d-block mb-1">Título de adjudicación</label>
+                        <p class="mb-0">{{ infoDetalles.title }}</p>
+                      </div>
+                      <div class="info-item mb-3">
+                        <label class="text-muted d-block mb-1">Artículo Licitado</label>
+                        <p class="mb-0">{{ infoDetalles.description }}</p>
+                      </div>
+                      <div class="info-item mb-3">
+                        <label class="text-muted d-block mb-1">Cantidad</label>
+                        <p class="mb-0">{{ infoDetalles.quantity }}</p>
+                      </div>
+                      <div class="info-item">
+                        <label class="text-muted d-block mb-1">Costo</label>
+                        <p class="mb-0">
+                          {{ infoDetalles.unit.value.amount | number:'1.2-2' }}
+                          <span class="currency">{{ infoDetalles.unit.value.currency }}</span>
+                        </p>
+                      </div>
                     </div>
-                    <div class="info-item mb-3">
-                      <label class="text-muted d-block mb-1">Título de adjudicación</label>
-                      <p class="mb-0">{{ selectedItem.title }}</p>
+
+                    <!-- Componente Servidores Públicos -->
+                    <app-data-servidor-publico 
+                      *ngIf="showServidoresInfo && selectedServidor"
+                      [servidores]="selectedServidor">
+                    </app-data-servidor-publico>
+    
+                    <!-- Contenido EFOS -->
+                    <div class="mt-3" *ngIf="showEfosInfo">
+                      <app-data-efos [efos]="infoDetalles.efos"></app-data-efos>
                     </div>
-                    <div class="info-item">
-                      <label class="text-muted d-block mb-1">Cantidad</label>
-                      <p class="mb-0">{{ selectedItem.quantity }}</p>
+    
+                    <!-- Contenido Sanciones -->
+                    <div class="mt-3" *ngIf="showSancionesInfo">
+                      <app-data-sancion-empresa [sanciones]="infoDetalles.sanciones"></app-data-sancion-empresa>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="card border-0 bg-light h-100">
-                  <div class="card-body">
-                    <h6 class="card-subtitle mb-3">Información Adicional</h6>
-                    <div class="d-flex flex-column gap-3">
-                      <div *ngIf="selectedItem.efos.length">
-                        <button type="button" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2" 
-                                (click)="openModal(selectedItem.efos)">
-                          <i class="bi bi-exclamation-circle-fill"></i> 
-                          Información EFO
-                        </button>
-                      </div>
-                      <div *ngIf="selectedItem.servidores_publicos.length">
-                        <button type="button" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2" 
-                                (click)="openModalSP(selectedItem.servidores_publicos)">
-                          <i class="bi bi-person-fill"></i> 
-                          Servidores Públicos
-                          <span class="badge bg-danger">{{ selectedItem.servidores_publicos.length }}</span>
-                        </button>
-                      </div>
-                      <div *ngIf="selectedItem.sanciones.length">
-                        <button type="button" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2" 
-                                (click)="openModalSanciones(selectedItem.sanciones)">
-                          <i class="bi bi-shield-fill-exclamation"></i>
-                          Sanciones
-                          <span class="badge bg-danger">{{ selectedItem.sanciones.length }}</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>

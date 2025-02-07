@@ -18,13 +18,20 @@ export class AppComponent implements OnInit {
   
   infoDetalles: any | undefined;
   infoEFO: any | undefined;
-  infoSP: any | undefined;
+  infoSP: any[] = []; // Cambiado a array
   infoSanciones: any | undefined;
+  selectedServidor: any = null; // Para guardar el servidor seleccionado
+  
+  showGeneralInfo: boolean = true;
+  showEfosInfo: boolean = false;
+  showServidoresInfo: boolean = false;
+  showSancionesInfo: boolean = false;
+  
   private modalDetalles: Modal | undefined;
   private modalInstance: Modal | undefined;
   private modalInstanceSP: Modal | undefined;
   private modalSanciones: Modal | undefined;
-
+  
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -80,32 +87,33 @@ export class AppComponent implements OnInit {
     this.resultados = [];
   }
 
-
   openModal(efo: any) {
     if (this.modalInstance) {
       this.infoEFO = efo;
       this.modalInstance.show();
     }
   }
+
   closeModal() {
     if (this.modalInstance) {
       this.modalInstance.hide();
     }
   }
 
-
-  openModalSP(sp: any) {
+  openModalSP(sp: any[]) {
     if (this.modalInstanceSP) {
-      this.infoSP = sp;
+      this.infoSP = sp;  // Recibe un array de servidores
       this.modalInstanceSP.show();
     }
   }
+
   closeModalSP() {
     if (this.modalInstanceSP) {
       this.modalInstanceSP.hide();
+      this.selectedServidor = null; // Limpiar la selección
+      this.infoSP = [];
     }
   }
-
 
   openModalSanciones(data: any) {
     if (this.modalSanciones) {
@@ -113,24 +121,74 @@ export class AppComponent implements OnInit {
       this.modalSanciones.show();
     }
   }
+
   closeModalSanciones() {
     if (this.modalSanciones) {
       this.modalSanciones.hide();
     }
   }
 
-
   openModalDetalles(data: any) {
     if (this.modalDetalles) {
       this.infoDetalles = data;
+      // Reseteamos el estado de los toggles al abrir el modal
+      this.showGeneralInfo = true;
+      this.showEfosInfo = false;
+      this.showServidoresInfo = false;
+      this.showSancionesInfo = false;
       this.modalDetalles.show();
     }
   }
+
   closeModalDetalles() {
     if (this.modalDetalles) {
       this.modalDetalles.hide();
+      // Reseteamos el estado de los toggles al cerrar el modal
+      this.showGeneralInfo = true;
+      this.showEfosInfo = false;
+      this.showServidoresInfo = false;
+      this.showSancionesInfo = false;
     }
   }
 
+  toggleGeneralInfo() {
+    this.showGeneralInfo = !this.showGeneralInfo;
+    this.showEfosInfo = false;
+    this.showServidoresInfo = false;
+    this.showSancionesInfo = false;
+  }
 
+  toggleEfosInfo() {
+    this.showEfosInfo = !this.showEfosInfo;
+    this.showGeneralInfo = false;
+    this.showServidoresInfo = false;
+    this.showSancionesInfo = false;
+  }
+
+  toggleServidoresInfo(servidor?: any) {
+    this.showServidoresInfo = !this.showServidoresInfo;
+    this.showGeneralInfo = false;
+    this.showEfosInfo = false;
+    this.showSancionesInfo = false;
+    
+    if (servidor) {
+      this.selectedServidor = servidor;
+    } else if (!this.showServidoresInfo) {
+      this.selectedServidor = null;
+    } else if (!this.selectedServidor && this.infoDetalles?.servidores_publicos?.length) {
+      this.selectedServidor = this.infoDetalles.servidores_publicos[0];
+    }
+  }
+
+  toggleSancionesInfo() {
+    this.showSancionesInfo = !this.showSancionesInfo;
+    this.showGeneralInfo = false;
+    this.showEfosInfo = false;
+    this.showServidoresInfo = false;
+  }
+
+  selectServidor(servidor: any) {
+    this.selectedServidor = servidor;
+  }
+  
 }

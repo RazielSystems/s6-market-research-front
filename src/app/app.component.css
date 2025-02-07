@@ -812,3 +812,33 @@ body {
 .bg-danger {
   background-color: var(--sancionado) !important;
 }
+
+.btn-outline-success {
+  color: var(--sp);
+  border-color: var(--sp);
+  background: #fff;
+}
+.btn-outline-success:hover {
+  color: #fff;
+  background-color: var(--sp) !important;
+}
+
+.btn-outline-warning {
+  background: white;
+  color: var(--efo);
+}
+
+.btn-outline-warning:hover {
+  color: #fff;
+  background-color: var(--efo) !important;
+}
+
+.btn-outline-danger {
+  background: white;
+  color: var(--sancionado);
+}
+
+.btn-outline-danger:hover {
+  color: #fff;
+  background-color: var(--sancionado) !important;
+}
