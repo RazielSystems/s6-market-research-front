@@ -1,0 +1,106 @@
+/* Estilos generales */
+.price-section.card {
+  border: 2px solid #81499440;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 100%);
+}
+
+.price-section.card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 12px 20px -8px rgba(129, 73, 148, 0.15);
+  border-color: #814994;
+}
+
+/* Contenedores */
+.description-container {
+  background: #f0ecf1;
+  border-radius: 12px;
+  padding: 10px 15px;
+  margin-top: 5px;
+  transition: all 0.3s ease;
+}
+
+.description {
+  color: #4b5563;
+  line-height: 1.5;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Acordeón personalizado */
+.accordion-button {
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  box-shadow: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+  color: inherit;
+  background: none;
+}
+
+.accordion-button::after {
+  background-size: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.accordion-body {
+  padding: 1.5rem;
+}
+
+/* Lista grupo personalizada */
+.list-group-item {
+  border: 1px solid #81499440;
+  margin-bottom: 0.5rem;
+  border-radius: 8px !important;
+  transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+  transform: translateX(5px);
+  border-color: #814994;
+}
+
+.list-group-item.active {
+  background-color: #814994;
+  border-color: #814994;
+}
+
+.institution-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.institution-siglas {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-left: 0.5rem;
+}
+
+/* Títulos y textos */
+h6.text-uppercase {
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.text-primary {
+  color: #1c7cbf !important;
+}
+
+.card-body {
+  border: 2px solid #81499440;
+    border-radius: 13px;
+    padding: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .price-section.card:hover {
+    transform: translateY(-2px) scale(1.005);
+  }
+
+  .list-group-item:hover {
+    transform: translateX(2px);
+  }
+}

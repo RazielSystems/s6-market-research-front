@@ -1,125 +1,184 @@
-<!-- <pre> {{ sanciones | json }}</pre> -->
-<div class="accordion" id="infoSanciones">
-  <div class="accordion-item" *ngFor="let item of sanciones; index as i">
+<!-- Vista para el modal de badge -->
+<div class="accordion" id="infoSanciones" *ngIf="!showInDetails">
+  <div class="accordion-item price-section card border-0" *ngFor="let item of sanciones; index as i">
     <h2 class="accordion-header">
-      <button
-        class="accordion-button"
-        type="button"
-        data-bs-toggle="collapse"
-        [attr.data-bs-target]="'#collapse' + i"
-        aria-expanded="false"
-        [attr.aria-controls]="'collapse' + i"
-      >
-        {{ item.institucionDependencia.nombre }} ({{
-          item.institucionDependencia.siglas
-        }})
+      <button class="accordion-button" [class.collapsed]="i !== 0"
+              type="button"
+              data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapse' + i"
+              [attr.aria-expanded]="i === 0"
+              [attr.aria-controls]="'collapse' + i">
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-shield-fill-exclamation text-danger me-2"></i>
+          <div>
+            <span class="institution-name">{{ item.institucionDependencia.nombre }}</span>
+            <span class="institution-siglas">({{ item.institucionDependencia.siglas }})</span>
+          </div>
+        </div>
       </button>
     </h2>
-    <div
-      [attr.id]="'collapse' + i"
-      class="accordion-collapse collapse"
-      data-bs-parent="#infoSanciones"
-    >
+    <div [id]="'collapse' + i"
+         class="accordion-collapse collapse"
+         [class.show]="i === 0"
+         data-bs-parent="#infoSanciones">
       <div class="accordion-body">
-        <div class="container">
-          <div class="row mb-4">
-            <div class="col">
-              <div class="card">
-                <div class="card-body">
-                  <p>
-                    <strong>Causa, motivo, hechos:</strong> <br />{{
-                      item.causaMotivoHechos
-                    }}
-                  </p>
+        <div class="content-cards">
+          <!-- Causa y Tipo de Sanción -->
+          <div class="price-section card border-0 mb-4">
+            <div class="card-body">
+              <div class="content-section mb-3">
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-exclamation-circle text-primary me-2"></i>
+                  <h6 class="mb-0 text-uppercase fw-bold">Causa, motivo, hechos</h6>
+                </div>
+                <div class="description-container">
+                  <p class="description mb-0">{{ item.causaMotivoHechos }}</p>
+                </div>
+              </div>
 
-                  <p><strong>acto:</strong> <br />{{ item.acto }}</p>
+              <div class="content-section mb-3">
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-card-text text-primary me-2"></i>
+                  <h6 class="mb-0 text-uppercase fw-bold">Acto</h6>
+                </div>
+                <div class="description-container">
+                  <p class="description mb-0">{{ item.acto }}</p>
+                </div>
+              </div>
 
-                  <p>
-                    <strong>Tipo de sanción:</strong> <br />{{
-                      item.tipoSancion.valor
-                    }}
-                  </p>
+              <div class="content-section">
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-exclamation-triangle text-primary me-2"></i>
+                  <h6 class="mb-0 text-uppercase fw-bold">Tipo de sanción</h6>
+                </div>
+                <div class="description-container">
+                  <p class="description mb-0">{{ item.tipoSancion.valor }}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="row">
-            <div class="col">
-              <div class="card">
+          <div class="row g-4">
+            <!-- Particular Sancionado -->
+            <div class="col-md-4">
+              <div class="price-section card border-0 h-100">
                 <div class="card-body">
-                  <h5 class="card-title">Particular Sancionado</h5>
+                  <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-person-fill text-primary me-2"></i>
+                    <h6 class="card-title mb-0 text-uppercase fw-bold">Particular Sancionado</h6>
+                  </div>
+                  
+                  <div class="content-section mb-3">
+                    <p class="text-muted mb-1">Nombre/Razón social</p>
+                    <div class="description-container">
+                      <p class="description mb-0">{{ item.particularSancionado.nombreRazonSocial }}</p>
+                    </div>
+                  </div>
 
-                  <p>
-                    <strong>Nombre, Razon social:</strong> <br />{{
-                      item.particularSancionado.nombreRazonSocial
-                    }}
-                  </p>
+                  <div class="content-section mb-3">
+                    <p class="text-muted mb-1">Objeto social</p>
+                    <div class="description-container">
+                      <p class="description mb-0">{{ item.particularSancionado.objetoSocial }}</p>
+                    </div>
+                  </div>
 
-                  <p>
-                    <strong>Objeto social:</strong> <br />{{
-                      item.particularSancionado.objetoSocial
-                    }}
-                  </p>
-
-                  <p>
-                    <strong>Tipo de persona:</strong> <br />{{
-                      item.particularSancionado.tipoPersona
-                    }}
-                  </p>
+                  <div class="content-section">
+                    <p class="text-muted mb-1">Tipo de persona</p>
+                    <div class="description-container">
+                      <p class="description mb-0">{{ item.particularSancionado.tipoPersona }}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="col">
-              <div class="card">
+            <!-- Responsable de la sanción -->
+            <div class="col-md-4">
+              <div class="price-section card border-0 h-100">
                 <div class="card-body">
-                  <h5 class="card-title">Responsable de la sancion</h5>
-                  <p>
-                    <strong>Nombre:</strong> <br />{{
-                      item.responsableSancion.nombre
-                    }}
-                  </p>
+                  <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-person-badge text-primary me-2"></i>
+                    <h6 class="card-title mb-0 text-uppercase fw-bold">Responsable de la sanción</h6>
+                  </div>
 
-                  <p>
-                    <strong>Primer apellido:</strong> <br />{{
-                      item.responsableSancion.primerApellido
-                    }}
-                  </p>
-
-                  <p>
-                    <strong>Segundo apellido:</strong> <br />{{
-                      item.responsableSancion.segundoApellido
-                    }}
-                  </p>
+                  <div class="content-section mb-3">
+                    <p class="text-muted mb-1">Nombre completo</p>
+                    <div class="description-container">
+                      <p class="description mb-0">
+                        {{ item.responsableSancion.nombre }}
+                        {{ item.responsableSancion.primerApellido }}
+                        {{ item.responsableSancion.segundoApellido }}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="col">
-              <div class="card">
+            <!-- Resolución -->
+            <div class="col-md-4">
+              <div class="price-section card border-0 h-100">
                 <div class="card-body">
-                  <h5 class="card-title">Resolución</h5>
+                  <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-file-text text-primary me-2"></i>
+                    <h6 class="card-title mb-0 text-uppercase fw-bold">Resolución</h6>
+                  </div>
 
-                  <p>
-                    <strong>Sentido:</strong> <br />{{
-                      item.resolucion.sentido
-                    }}
-                  </p>
+                  <div class="content-section mb-3">
+                    <p class="text-muted mb-1">Sentido</p>
+                    <div class="description-container">
+                      <p class="description mb-0">{{ item.resolucion.sentido }}</p>
+                    </div>
+                  </div>
 
-                  <p><strong>url:</strong> <br />{{ item.resolucion.url }}</p>
+                  <div class="content-section mb-3">
+                    <p class="text-muted mb-1">URL</p>
+                    <div class="description-container">
+                      <p class="description mb-0">{{ item.resolucion.url }}</p>
+                    </div>
+                  </div>
 
-                  <p>
-                    <strong>Fecha notificacion:</strong> <br />{{
-                      item.resolucion.fechaNotificacion
-                    }}
-                  </p>
+                  <div class="content-section">
+                    <p class="text-muted mb-1">Fecha de notificación</p>
+                    <div class="description-container">
+                      <p class="description mb-0">{{ item.resolucion.fechaNotificacion | date:'dd/MM/yyyy' }}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Vista para el modal de detalles -->
+<div class="row" *ngIf="showInDetails">
+  <!-- Lista de sanciones (columna izquierda) -->
+  <div class="col-md-3">
+    <div class="list-group">
+      <button *ngFor="let item of sanciones; let i = index"
+              class="list-group-item list-group-item-action"
+              [class.active]="selectedSancionIndex === i"
+              (click)="selectSancion(i)">
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-shield-fill-exclamation"></i>
+          <div>
+            <small class="d-block">{{ item.institucionDependencia.siglas }}</small>
+            <span class="institution-name">{{ item.institucionDependencia.nombre }}</span>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenido de la sanción seleccionada (columna derecha) -->
+  <div class="col-md-9" *ngIf="selectedSancion">
+    <!-- Aquí reutilizamos el mismo contenido del acordeón pero sin el header -->
+    <div class="content-cards">
+      <!-- [Mismo contenido que en el acordeón, pero sin el botón de expansión] -->
     </div>
   </div>
 </div>

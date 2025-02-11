@@ -352,6 +352,10 @@ body {
   padding: 1rem; /* Padding interno del card */
 }
 
+.results-grid .card-body {
+  padding: 1rem; /* Padding interno del card */
+}
+
 .table-responsive {
   margin: -1rem; /* Ajustamos margen para que la tabla se alinee correctamente */
 
@@ -706,6 +710,8 @@ body {
   border-radius: 10px;
 }
 
+
+
 .price {
   background: #f0ecf1;
   border-radius: 25px;
@@ -898,6 +904,11 @@ span.efos {
   border-radius: 12px;
   background: linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 100%);
   transition: all 0.3s ease;
+}
+
+.price-section .card-body {
+  border: 2px solid #81499440;
+  border-radius: 12px;
 }
 
 .description {
