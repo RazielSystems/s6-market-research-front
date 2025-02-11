@@ -105,7 +105,7 @@
             </p>
           </div>
   
-          <div class="badge-section d-flex m-2">
+          <div class="badge-section d-flex m-2 mb-4">
             <div *ngIf="item.efos.length" class="mx-1">
               <button 
                 type="button" 
@@ -116,7 +116,8 @@
                 <span class="position-absolute top-0 start-100 translate-middle badge bg-warning">
                   {{ item.efos.length }}
                   <span class="visually-hidden">unread messages</span>
-                </span>  
+                </span> 
+                <span class="efos">EFO</span> 
               </button>
             </div>
 
@@ -131,6 +132,7 @@
                   {{ item.servidores_publicos.length }}
                   <span class="visually-hidden">unread messages</span>
                 </span> 
+                <span class="servidores">Servidores públicos</span>
               </button>
             </div>
 
@@ -145,6 +147,7 @@
                   {{ item.sanciones.length }}
                   <span class="visually-hidden">unread messages</span>
                 </span> 
+                <span class="sanciones">Sanciones</span>
               </button>
             </div>          
           </div>
@@ -259,7 +262,7 @@
                             class="btn btn-outline-success w-100 d-flex align-items-center justify-content-center gap-2"
                             (click)="toggleServidoresInfo()">
                       <i class="bi bi-person-fill"></i>
-                      Servidores Públicos
+                      Servidores públicos relacionados con la empresa
                       <span class="badge bg-success">{{ infoDetalles.servidores_publicos.length }}</span>
                       <i class="bi" [ngClass]="showServidoresInfo ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
                     </button>
@@ -291,59 +294,137 @@
                 </div>
               </div>
     
-              <!-- Columna de Contenido -->
-              <div class="col-md-9">
-                <div class="card border-0 bg-light h-100">
-                  <div class="card-body">
-                    <!-- Información General (mostrada por defecto) -->
-                    <div *ngIf="showGeneralInfo">
-                      <div class="info-item mb-3">
-                        <label class="text-muted d-block mb-1">Nombre de la Compañía</label>
-                        <p class="mb-0">{{ infoDetalles.suppliers.name }}</p>
-                      </div>
-                      <div class="info-item mb-3">
-                        <label class="text-muted d-block mb-1">OCID</label>
-                        <p class="mb-0">{{ infoDetalles.ocid }}</p>
-                      </div>
-                      <div class="info-item mb-3">
-                        <label class="text-muted d-block mb-1">Título de adjudicación</label>
-                        <p class="mb-0">{{ infoDetalles.title }}</p>
-                      </div>
-                      <div class="info-item mb-3">
-                        <label class="text-muted d-block mb-1">Artículo Licitado</label>
-                        <p class="mb-0">{{ infoDetalles.description }}</p>
-                      </div>
-                      <div class="info-item mb-3">
-                        <label class="text-muted d-block mb-1">Cantidad</label>
-                        <p class="mb-0">{{ infoDetalles.quantity }}</p>
-                      </div>
-                      <div class="info-item">
-                        <label class="text-muted d-block mb-1">Costo</label>
-                        <p class="mb-0">
-                          {{ infoDetalles.unit.value.amount | number:'1.2-2' }}
-                          <span class="currency">{{ infoDetalles.unit.value.currency }}</span>
-                        </p>
-                      </div>
-                    </div>
+<!-- Columna de Contenido -->
+<div class="col-md-9">
+  <div class="card border-0 shadow-sm h-100">
+    <div class="card-body p-0">
+      <!-- Información General -->
+      <div *ngIf="showGeneralInfo">
+        <!-- Header con información de la empresa -->
+        <div class="company-section p-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="company-icon">
+              <i class="bi bi-building-fill"></i>
+            </div>
+            <div>
+              <h5 class="company-name mb-1">{{ infoDetalles.suppliers.name }}</h5>
+              <div class="d-flex align-items-center text-muted">
+                <i class="bi bi-upc me-2"></i>
+                <span class="rfc">OCID: {{ infoDetalles.ocid }}</span>
+              </div>
+              <div class="d-flex align-items-center text-muted">
+                <i class="bi bi-upc me-2"></i>
+                <span class="rfc">RFC: {{ infoDetalles.suppliers.rfc }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                    <!-- Componente Servidores Públicos -->
-                    <app-data-servidor-publico 
-                      *ngIf="showServidoresInfo && selectedServidor"
-                      [servidores]="selectedServidor">
-                    </app-data-servidor-publico>
-    
-                    <!-- Contenido EFOS -->
-                    <div class="mt-3" *ngIf="showEfosInfo">
-                      <app-data-efos [efos]="infoDetalles.efos"></app-data-efos>
-                    </div>
-    
-                    <!-- Contenido Sanciones -->
-                    <div class="mt-3" *ngIf="showSancionesInfo">
-                      <app-data-sancion-empresa [sanciones]="infoDetalles.sanciones"></app-data-sancion-empresa>
-                    </div>
+        <!-- Contenido Principal -->
+        <div class="p-4">
+          <div class="row g-4">
+            <!-- Título de Adjudicación -->
+            <div class="col-12">
+              <div class="price-section card border-0">
+                <div class="card-body">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-file-text text-primary me-2"></i>
+                    <h6 class="mb-0 text-uppercase fw-bold">Título de adjudicación</h6>
+                  </div>
+                  <div class="description-container">
+                    <p class="description mb-0">{{ infoDetalles.title }}</p>
                   </div>
                 </div>
               </div>
+            </div>
+
+            <!-- Artículo Licitado -->
+            <div class="col-12">
+              <div class="price-section card border-0">
+                <div class="card-body">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-box-seam text-primary me-2"></i>
+                    <h6 class="mb-0 text-uppercase fw-bold">Artículo Licitado</h6>
+                  </div>
+                  <div class="description-container">
+                    <p class="description mb-0">{{ infoDetalles.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cantidad -->
+            <div class="col-md-6">
+              <div class="price-section card border-0">
+                <div class="card-body">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-123 text-primary me-2"></i>
+                    <h6 class="mb-0 text-uppercase fw-bold">Cantidad</h6>
+                  </div>
+                  <div class="price-container">
+                    <p class="price mb-0 d-flex justify-content-end">
+                      {{ infoDetalles.quantity | number:'1.0-0' }}
+                      <span class="currency ms-2">unidades</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Costo -->
+            <div class="col-md-6">
+              <div class="price-section card border-0">
+                <div class="card-body">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-currency-dollar text-primary me-2"></i>
+                    <h6 class="mb-0 text-uppercase fw-bold">Costo</h6>
+                  </div>
+                  <div class="price-container">
+                    <p class="price mb-0 d-flex justify-content-end">
+                      {{ infoDetalles.unit.value.amount | number:'1.2-2' }}
+                      <span class="currency ms-2">{{ infoDetalles.unit.value.currency }}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Línea de tiempo o información adicional -->
+          <div class="mt-4 pt-4 border-top">
+            <div class="d-flex align-items-center">
+              <div class="bg-opacity-10 p-2 rounded-circle me-3">
+                <i class="bi bi-clock text-primary"></i>
+              </div>
+              <div>
+                <h6 class="mb-1 text-primary">Estado del Proceso</h6>
+                <p class="text-muted mb-0">
+                  Última actualización: {{ infoDetalles.date | date:'dd/MM/yyyy' }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Componente Servidores Públicos -->
+      <app-data-servidor-publico 
+        *ngIf="showServidoresInfo && selectedServidor"
+        [servidores]="selectedServidor">
+      </app-data-servidor-publico>
+
+      <!-- Contenido EFOS -->
+      <div class="mt-3" *ngIf="showEfosInfo">
+        <app-data-efos [efos]="infoDetalles.efos"></app-data-efos>
+      </div>
+
+      <!-- Contenido Sanciones -->
+      <div class="mt-3" *ngIf="showSancionesInfo">
+        <app-data-sancion-empresa [sanciones]="infoDetalles.sanciones"></app-data-sancion-empresa>
+      </div>
+    </div>
+  </div>
+</div>
             </div>
           </div>
         </div>

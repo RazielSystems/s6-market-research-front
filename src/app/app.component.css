@@ -571,12 +571,12 @@ body {
 }
 
 .btn-outline-primary {
-  border-color: #6610f2;
-  color: #6610f2;
+  border-color: var(--primario);
+  color: var(--primario);
 }
 
 .btn-outline-primary:hover {
-  background-color: #6610f2;
+  background-color: var(--primario);
   color: white;
 }
 
@@ -790,7 +790,27 @@ body {
   transform: translateY(-2px);
 }
 
+span.sanciones {
+  position: absolute;
+  top: 30px;
+  left: -20px;
+  color: var(--sancionado);
+}
 
+span.servidores {
+  position: absolute;
+  top: 38px;
+  left: -20px;
+  line-height: 13px;
+  color: var(--sp);
+}
+
+span.efos {
+  position: absolute;
+    top: 32px;
+    left: -2px;
+    color: var(--efo);
+}
 
 .text-success {
   color: var(--sp) !important;
@@ -841,4 +861,253 @@ body {
 .btn-outline-danger:hover {
   color: #fff;
   background-color: var(--sancionado) !important;
+}
+
+
+/* Estilos adicionales para la sección de información detallada */
+
+
+
+.company-section {
+  background: #79467f1c;
+  border-radius: 12px 12px 0 0;
+}
+
+.company-icon {
+  width: 68px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: relative; */
+}
+
+.company-icon i {
+  font-size: 24px;
+  color: #7d488a;
+}
+
+.company-name {
+  color: #7d488a;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.card {
+  border: 2px solid #81499440;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 100%);
+  transition: all 0.3s ease;
+}
+
+.description {
+  color: #4b5563;
+  line-height: 1.5;
+  font-size: 0.9rem;
+  text-align: justify;
+}
+
+.price {
+  background: #f0ecf1;
+  border-radius: 25px;
+  padding: 3px 15px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #7d488a;
+}
+
+.currency {
+  font-size: 1rem;
+  color: #6b7280;
+  font-weight: normal;
+}
+
+.content-section h6 {
+  color: #1c7cbf;
+}
+
+.text-primary {
+  color: #1c7cbf !important;
+}
+
+.bg-primary {
+  background: linear-gradient(230deg,#1c7cbf,#1c7cbf 4%,#9f58e2 49%,#6d4061) !important;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.border-top {
+  border-color: #e5e7eb !important;
+}
+
+.list-group-item {
+  font-size: .85rem;
+  padding: .5rem;
+}
+
+.list-group-item.active {
+  background-color: var(--primario);
+  border-color: var(--primario);
+}
+
+button.btn {
+  text-align: left;
+  line-height: .95rem;
+}
+
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+  .company-name {
+    font-size: 1.1rem;
+  }
+  
+  .price {
+    font-size: 1.5rem;
+  }
+}
+
+
+.description-container {
+  background: #f0ecf1;
+  border-radius: 25px;
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
+.description {
+  color: #4b5563;
+  line-height: 1.5;
+  font-size: 0.9rem;
+  text-align: justify;
+}
+
+.price-section.card {
+  border: 2px solid #81499440;
+  transition: all 0.3s ease;
+}
+
+.price-section.card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.price-container {
+  background: #f0ecf1;
+  border-radius: 25px;
+  padding: 3px 15px;
+  margin-top: 10px;
+}
+
+.price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #7d488a;
+}
+
+.currency {
+  font-size: 1rem;
+  color: #6b7280;
+  font-weight: normal;
+}
+
+.text-primary {
+  color: #1c7cbf !important;
+}
+
+h6.text-uppercase {
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.price-section.card {
+  border: 2px solid #81499440;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 100%);
+}
+
+/* Efecto de elevación y escala suave */
+.price-section.card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 12px 20px -8px rgba(129, 73, 148, 0.15);
+  border-color: #814994;
+}
+
+/* Efecto de brillo en hover */
+.price-section.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.price-section.card:hover::before {
+  left: 100%;
+}
+
+/* Animación para los íconos */
+.price-section.card .bi {
+  transition: transform 0.3s ease;
+}
+
+.price-section.card:hover .bi {
+  transform: scale(1.2);
+}
+
+/* Animación para el contenido */
+.description-container,
+.price-container {
+  background: #f0ecf1;
+  border-radius: 25px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.price-section.card:hover .description-container,
+.price-section.card:hover .price-container {
+  background: #e8e0ea;
+  transform: scale(1.02);
+}
+
+/* Animación para el texto del precio */
+.price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #7d488a;
+  transition: all 0.3s ease;
+}
+
+.price-section.card:hover .price {
+  color: #612d6a;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Animación para los títulos */
+.text-uppercase {
+  transition: all 0.3s ease;
+}
+
+.price-section.card:hover .text-uppercase {
+  color: #1a6aa8 !important;
+  letter-spacing: 0.7px;
+}
+
+/* Ajustes responsive */
+@media (max-width: 768px) {
+  .price-section.card:hover {
+    transform: translateY(-2px) scale(1.005);
+  }
 }

@@ -78,3 +78,21 @@
   --bs-alert-border-color: #ffffff;
   --bs-alert-link-color: #ffbceb;
 }
+
+.servidor-publico h5 {
+  color: var(--primario);
+  border-bottom: 1px solid rgb(125 72 138 / 24%);
+  padding: 0 0 .5rem 0;
+} 
+
+.list-group-item {
+  font-size: .85rem;
+  padding: .5rem;
+}
+
+.list-group-item.active {
+  background-color: var(--primario);
+  border-color: var(--primario);
+}
+
+
