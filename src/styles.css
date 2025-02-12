@@ -5,5 +5,12 @@
   --sp: rgb(57 190 170);
   --sancionado: rgb(243, 120, 120);
   --primario: rgb(125, 72, 138);
+  --secundario: rgb(128 82 141);
+  --black: rgb(102 102 102);
+  --highlight: rgb(188 94 199);
+  --borde-card: 1px solid rgb(125 72 138 / 24%);
+  --radius-card: 12px;
+  --fondo-card: #faf5ff;
+  --bg-degradado: linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 100%);
 }
 

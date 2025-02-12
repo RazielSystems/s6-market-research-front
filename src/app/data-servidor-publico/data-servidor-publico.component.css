@@ -81,7 +81,7 @@
 
 .servidor-publico h5 {
   color: var(--primario);
-  border-bottom: 1px solid rgb(125 72 138 / 24%);
+  border-bottom: var(--borde-card);
   padding: 0 0 .5rem 0;
 } 
 
@@ -91,8 +91,30 @@
 }
 
 .list-group-item.active {
-  background-color: var(--primario);
-  border-color: var(--primario);
+  background-color: var(--sp);
+  border-color: var(--sp);
+}
+
+
+.servidor-publico .card-body {
+  border: var(--borde-card);
+  border-radius: var(--radius-card);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-title {
+  color: var(--secundario);
+  font-weight: 600;
+}
+
+p {
+  color: var(--black);
+}
+
+span.monto {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #ffd7f0;
 }
 
 

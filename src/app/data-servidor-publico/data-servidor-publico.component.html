@@ -1,4 +1,4 @@
-<div class="container servidor-publico" *ngIf="servidores">
+<div class="container servidor-publico mt-3" *ngIf="servidores">
   <div class="row">
     <div *ngIf="isServidoresArray()" class="col-md-3">
       <!-- Lista de servidores (solo se muestra si es un array) -->
@@ -39,13 +39,13 @@
       <div class="tab-content">
         <!-- Tab Empleo -->
         <div class="tab-pane fade" [class.show]="activeTab === 'empleo'" [class.active]="activeTab === 'empleo'">
-          <div class="card">
+          <div class="card mb-3">
             <div class="card-body">
               <h5 class="card-title mb-4">Información del Empleo Actual</h5>
               <div class="row g-3">
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <p class="text-muted mb-1">Nombre del Servidor Público</p>
+                    <p class=" mb-1">Nombre del Servidor Público</p>
                     <p class="fw-bold">
                       {{ getCurrentServidor()?.declarante?.nombre }}
                       {{ getCurrentServidor()?.declarante?.primerApellido }}
@@ -53,32 +53,32 @@
                     </p>
                   </div>
                   <div class="mb-3">
-                    <p class="text-muted mb-1">Ente Público</p>
+                    <p class=" mb-1">Ente Público</p>
                     <p class="fw-bold">{{ getCurrentServidor()?.empleo?.nombreEntePublico || 'No disponible' }}</p>
                   </div>
                   <div class="mb-3">
-                    <p class="text-muted mb-1">Área de Adscripción</p>
+                    <p class=" mb-1">Área de Adscripción</p>
                     <p class="fw-bold">{{ getCurrentServidor()?.empleo?.areaAdscripcion || 'No disponible' }}</p>
                   </div>
                   <div class="mb-3">
-                    <p class="text-muted mb-1">Cargo</p>
+                    <p class=" mb-1">Cargo</p>
                     <p class="fw-bold">{{ getCurrentServidor()?.empleo?.empleoCargoComision || 'No disponible' }}</p>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <p class="text-muted mb-1">Función Principal</p>
+                    <p class=" mb-1">Función Principal</p>
                     <p class="fw-bold">{{ getCurrentServidor()?.empleo?.funcionPrincipal || 'No disponible' }}</p>
                   </div>
                   <div class="mb-3">
-                    <p class="text-muted mb-1">Fecha de Toma de Posesión</p>
+                    <p class=" mb-1">Fecha de Toma de Posesión</p>
                     <p class="fw-bold">{{ getCurrentServidor()?.empleo?.fechaTomaPosesion | date:'dd/MM/yyyy' }}</p>
                   </div>
                   <div class="mb-3">
-                    <p class="text-muted mb-1">Teléfono de Oficina</p>
+                    <p class=" mb-1">Teléfono de Oficina</p>
                     <p class="fw-bold">
                       {{ getCurrentServidor()?.empleo?.telefonoOficina?.telefono || 'No disponible' }}
-                      <span class="text-muted" *ngIf="getCurrentServidor()?.empleo?.telefonoOficina?.extension">
+                      <span class="fw-bold" *ngIf="getCurrentServidor()?.empleo?.telefonoOficina?.extension">
                         ext. {{ getCurrentServidor()?.empleo?.telefonoOficina?.extension }}
                       </span>
                     </p>
@@ -91,7 +91,7 @@
   
         <!-- Tab Participación -->
         <div class="tab-pane fade" [class.show]="activeTab === 'participacion'" [class.active]="activeTab === 'participacion'">
-          <div class="card">
+          <div class="card mb-3">
             <div class="card-body">
               <h5 class="card-title mb-4">Participación en Empresas</h5>
               <div class="row g-3">
@@ -129,7 +129,7 @@
                 <span>Remuneración:</span>
                 {{ getCurrentServidor()?.participacion?.recibeRemuneracion ? "Sí" : "No" }} recibe remuneración
                 <span *ngIf="getCurrentServidor()?.participacion?.recibeRemuneracion">
-                  - Monto mensual: {{ getCurrentServidor()?.participacion?.montoMensual?.valor | currency:'MXN':'symbol-narrow':'1.2-2' }}
+                 <span class="monto"> - Monto mensual: {{ getCurrentServidor()?.participacion?.montoMensual?.valor | currency:'MXN':'symbol-narrow':'1.2-2' }}</span>
                 </span>
               </div>
             </div>
