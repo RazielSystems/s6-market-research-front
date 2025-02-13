@@ -1,8 +1,107 @@
+/* sancion-empresa.component.css */
+.nav-link {
+  color: #8e44ad;
+  cursor: pointer;
+}
+
+.nav-link.active {
+  color: #8e44ad;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #9b59b6;
+}
+
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  color: #666;
+  position: relative;
+  padding: 0.75rem 1rem;
+  transition: color 0.3s;
+}
+
+.nav-tabs .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #9333ea;
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.nav-tabs .nav-link.active {
+  border: none;
+  color: #bc5ec7;
+}
+
+.nav-tabs .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.nav-tabs .nav-link:hover {
+  border: none;
+  color: #bc5ec7;
+}
+
+.accordion-button:not(.collapsed) {
+  --bs-accordion-active-bg: #faf5ff;
+    color: #6b4b78;
+    font-weight: 700;
+}
+
+.accordion {
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgb(95 35 151 / 38%);
+}
+
+.tab-pane > .card {
+  background: #faf5ff;
+  border: none;
+}
+
+.tab-pane .card-body p {
+  font-size: .875rem;
+  line-height: 1.25rem;
+}
+
+.alert-info {
+  --bs-alert-color: #ffffff;
+  --bs-alert-bg: rgb(133 78 131);
+  --bs-alert-border-color: #ffffff;
+  --bs-alert-link-color: #ffbceb;
+}
+
+.alert-info {
+  --bs-alert-color: #212529;
+  --bs-alert-bg: rgb(252 224 255);
+  --bs-alert-border-color: #decae2;
+  --bs-alert-link-color: #ffbceb;
+}
+
+.sancion-empresa h5 {
+  color: var(--primario);
+  border-bottom: var(--borde-card);
+  padding: 0 0 .5rem 0;
+} 
+
+p {
+  color: var(--black);
+}
+
+
 /* Estilos generales */
 .price-section.card {
-  border: 2px solid #81499440;
+  
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: linear-gradient(135deg, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 100%);
+  background: var(--bg-degradado)
 }
 
 .price-section.card:hover {
@@ -13,7 +112,6 @@
 
 /* Contenedores */
 .description-container {
-  background: #f0ecf1;
   border-radius: 12px;
   padding: 10px 15px;
   margin-top: 5px;
@@ -88,11 +186,46 @@ h6.text-uppercase {
   color: #1c7cbf !important;
 }
 
-.card-body {
-  border: 2px solid #81499440;
-    border-radius: 13px;
-    padding: 15px;
+#infoSanciones h6 {
+  color: var(--contraste);
 }
+
+.content-section h6 {
+  color: var(--contraste);
+}
+
+.card-body {
+  border: var(--borde-card);
+  border-radius: var(--radius-card);
+  background: var(--fondo-card);
+  box-shadow: var(--shadow-card);
+  padding: 15px;
+}
+
+.causa-section.card,
+.particular-section.card,
+.resolucion-section.card,
+.responsable-section.card {
+  transition: all 0.3s ease;
+}
+
+.causa-section.card:hover,
+.particular-section.card:hover,
+.resolucion-section.card:hover,
+.responsable-section.card:hover {
+  box-shadow:var(--shadow-card-hover);
+  transform: var(--shadow-transform);
+}
+
+.causa-section.card:hover .description-container,
+.particular-section.card:hover .description-container,
+.resolucion-section.card:hover .description-container,
+.responsable-section.card:hover .description-container {
+  background: var(--bg-p-hover);
+}
+
+
+
 
 /* Responsive */
 @media (max-width: 768px) {

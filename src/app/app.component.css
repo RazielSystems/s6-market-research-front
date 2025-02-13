@@ -693,7 +693,7 @@ body {
 
 
 .content-section h6, .price-section h6 {
-  color: #1c7cbf;
+  color: var(--contraste);
 }
 
 .company-section {
@@ -901,12 +901,9 @@ span.efos {
 }
 
 .content-section h6 {
-  color: #1c7cbf;
+  color: var(--contraste);
 }
 
-.text-primary {
-  color: #1c7cbf !important;
-}
 
 .bg-primary {
   background: linear-gradient(230deg,#1c7cbf,#1c7cbf 4%,#9f58e2 49%,#6d4061) !important;
@@ -928,6 +925,11 @@ span.efos {
 .sp .list-group-item.active {
   background-color: var(--sp);
   border-color: var(--sp);
+}
+
+.sanciones .list-group-item.active {
+  background-color: var(--sancionado);
+  border-color: var(--sancionado);
 }
 
 .list-group-item.active {
@@ -987,9 +989,7 @@ button.btn {
   font-weight: normal;
 }
 
-.text-primary {
-  color: #1c7cbf !important;
-}
+
 
 h6.text-uppercase {
   font-size: 0.85rem;
@@ -1085,7 +1085,7 @@ h6.text-uppercase {
 
 .price-section.card:hover .description-container,
 .price-section.card:hover .price-container {
-  background: #f0ecf1;
+  background: var(--bg-p-hover);
   transform: scale(1.02);
 }
 
@@ -1108,7 +1108,7 @@ h6.text-uppercase {
 }
 
 .price-section.card:hover .text-uppercase {
-  color: #1a6aa8 !important;
+  color: var(--contraste) !important;
   letter-spacing: 0.7px;
 }
 

@@ -18,10 +18,13 @@ export class AppComponent implements OnInit {
   infoEFO: any | undefined;
   infoSP: any[] = [];
   infoSanciones: any | undefined;
+  
   selectedServidor: any = null;
+  selectedSancion: any = null;
   
   selectedButton: string = 'general';
   showServidoresList: boolean = true;
+  showSancionesList: boolean = true;
   
   showGeneralInfo: boolean = true;
   showEfosInfo: boolean = false;
@@ -124,6 +127,8 @@ export class AppComponent implements OnInit {
   closeModalSanciones() {
     if (this.modalSanciones) {
       this.modalSanciones.hide();
+      this.selectedSancion = null;
+      this.infoSanciones = undefined;
     }
   }
 
@@ -136,8 +141,10 @@ export class AppComponent implements OnInit {
       this.showEfosInfo = false;
       this.showServidoresInfo = false;
       this.showSancionesInfo = false;
-      this.showServidoresList = true; // La lista comienza visible
+      this.showServidoresList = true;
+      this.showSancionesList = true;
       this.selectedServidor = null;
+      this.selectedSancion = null;
       this.modalDetalles.show();
     }
   }
@@ -152,13 +159,20 @@ export class AppComponent implements OnInit {
       this.showServidoresInfo = false;
       this.showSancionesInfo = false;
       this.showServidoresList = false;
+      this.showSancionesList = false;
       this.selectedServidor = null;
+      this.selectedSancion = null;
     }
   }
 
-  // Método para controlar solo la visibilidad de la lista
+  // Método para controlar la visibilidad de la lista de servidores
   toggleServidoresList() {
     this.showServidoresList = !this.showServidoresList;
+  }
+
+  // Método para controlar la visibilidad de la lista de sanciones
+  toggleSancionesList() {
+    this.showSancionesList = !this.showSancionesList;
   }
 
   selectButton(buttonType: string) {
@@ -167,24 +181,22 @@ export class AppComponent implements OnInit {
     // Resetear estados
     this.showEfosInfo = false;
     this.showSancionesInfo = false;
+    this.showServidoresInfo = false;
+    this.showGeneralInfo = false;
+    
+    // Resetear selecciones
+    this.selectedServidor = null;
+    this.selectedSancion = null;
     
     switch(buttonType) {
       case 'general':
         this.showGeneralInfo = true;
-        this.showServidoresInfo = false;
-        this.selectedServidor = null;
         break;
       case 'efos':
-        this.showGeneralInfo = false;
-        this.showServidoresInfo = false;
         this.showEfosInfo = true;
-        this.selectedServidor = null;
         break;
       case 'sanciones':
-        this.showGeneralInfo = false;
-        this.showServidoresInfo = false;
         this.showSancionesInfo = true;
-        this.selectedServidor = null;
         break;
     }
   }
@@ -195,5 +207,15 @@ export class AppComponent implements OnInit {
     this.showServidoresInfo = true;
     this.showEfosInfo = false;
     this.showSancionesInfo = false;
+    this.selectedSancion = null;
+  }
+
+  selectSancion(sancion: any) {
+    this.selectedSancion = sancion;
+    this.showGeneralInfo = false;
+    this.showServidoresInfo = false;
+    this.showEfosInfo = false;
+    this.showSancionesInfo = true;
+    this.selectedServidor = null;
   }
 }
